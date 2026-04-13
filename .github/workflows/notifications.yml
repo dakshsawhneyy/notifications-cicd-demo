@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - run: exit 1
+    
       - name: Notify Slack
         run: |
           curl -X POST -H 'Content-type: application/json' \
