@@ -1,0 +1,23 @@
+name: Notifications CICD
+
+on: 
+  push:
+    branches: ["main"]
+
+jobs:
+  send_notification:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Notify Slack
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"Build Completed!"}' \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Notify Failure
+        if: failure()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"Build Failed!"}' \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
