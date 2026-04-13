@@ -16,10 +16,7 @@ jobs:
           curl -X POST -H 'Content-type: application/json' \
           --data '{"text":"Build Completed!"}' \
           ${{ secrets.SLACK_WEBHOOK_URL }}
-
-      - name: Notify Failure
-        if: failure()
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":"Build Failed!"}' \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+  build:
+    runs: windows-latest
+    steps:
+      - run: echo "Build Completed"
